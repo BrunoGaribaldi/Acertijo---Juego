@@ -11,9 +11,9 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full py-3 px-6 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
+      className="w-full py-3 px-6 border border-green-700 bg-black hover:bg-green-950 disabled:opacity-40 disabled:cursor-not-allowed text-green-400 tracking-widest text-sm transition-colors uppercase"
     >
-      {pending ? "Verificando..." : "Intentar"}
+      {pending ? "[ VERIFICANDO... ]" : "[ EJECUTAR ]"}
     </button>
   );
 }
@@ -35,33 +35,55 @@ export default function GuessForm() {
 
   if (state?.correct) {
     return (
-      <div className="py-4">
-        <div className="text-center mb-6">
-          <div className="text-6xl mb-4">🎉</div>
-          <h2 className="text-2xl font-bold text-green-400 mb-2">¡Ganaste!</h2>
-          <p className="text-slate-400">
-            {attempts === 1
-              ? "¡Lo lograste al primer intento!"
-              : `Lo lograste en ${attempts} intentos.`}
+      <div className="space-y-6">
+        <div className="border border-green-600 p-6 bg-green-950/20">
+          <p className="text-green-700 text-xs tracking-widest mb-3">
+            &gt; VERIFICANDO CONTRASEÑA...
+          </p>
+          <p className="text-green-400 text-xl tracking-widest glow-green mb-1">
+            ██ ACCESO CONCEDIDO ██
+          </p>
+          <p className="text-green-700 text-xs tracking-widest">
+            INTENTOS REQUERIDOS: {attempts} :: IDENTIDAD VERIFICADA
           </p>
         </div>
 
         {state.secretText && (
-          <div className="mt-6 p-5 bg-slate-700 border border-purple-500/40 rounded-xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-3">
-              🔓 Texto desbloqueado
-            </p>
-            <p className="text-slate-100 leading-relaxed whitespace-pre-wrap">
-              {state.secretText}
-            </p>
+          <div className="border border-red-900 bg-red-950/10">
+            {/* Header */}
+            <div className="border-b border-red-900 px-6 py-3 flex items-center justify-between">
+              <p className="text-red-600 text-xs tracking-widest">
+                [!] CLASIFICADO :: NIVEL OMEGA
+              </p>
+              <p className="text-red-900 text-xs tracking-widest">
+                ARCHIVO DESCIFRADO
+              </p>
+            </div>
+
+            {/* Content */}
+            <div className="px-6 py-6">
+              <p className="text-red-700 text-xs tracking-widest mb-5 uppercase">
+                [[ CONTENIDO DESBLOQUEADO ]]
+              </p>
+              <p className="text-green-300 text-sm leading-7 whitespace-pre-wrap break-words">
+                {state.secretText}
+              </p>
+            </div>
+
+            {/* Footer */}
+            <div className="border-t border-red-900 px-6 py-3">
+              <p className="text-red-900 text-xs tracking-widest">
+                [ ESTA INFORMACION ES CONFIDENCIAL ]
+              </p>
+            </div>
           </div>
         )}
 
         <button
           onClick={() => window.location.reload()}
-          className="mt-6 w-full px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl transition-colors text-sm"
+          className="w-full py-2 border border-green-900 hover:border-green-700 text-green-800 hover:text-green-600 tracking-widest text-xs transition-colors uppercase"
         >
-          Intentar de nuevo
+          [ REINICIAR SESION ]
         </button>
       </div>
     );
@@ -69,28 +91,30 @@ export default function GuessForm() {
 
   return (
     <form action={formAction} className="space-y-4">
-      <div>
+      <div className="flex items-center border border-green-800 bg-black focus-within:border-green-500 transition-colors">
+        <span className="px-3 text-green-600 text-sm select-none">&gt;</span>
         <input
           ref={inputRef}
           name="guess"
           type="text"
-          placeholder="Escribe tu respuesta..."
+          placeholder="INGRESAR CONTRASENA..."
           autoComplete="off"
           required
-          className="w-full px-4 py-3 bg-slate-700 border border-slate-600 focus:border-purple-500 focus:outline-none rounded-xl text-white placeholder-slate-400 transition-colors"
+          className="flex-1 py-3 pr-4 bg-transparent text-green-400 placeholder-green-900 text-sm tracking-widest focus:outline-none uppercase"
         />
       </div>
 
       {state && !state.correct && (
-        <p className="text-red-400 text-sm flex items-center gap-2">
-          <span>✗</span>
-          <span>{state.message}</span>
+        <div className="border border-red-900 px-4 py-2 flex items-center justify-between">
+          <p className="text-red-500 text-xs tracking-widest">
+            ACCESO DENEGADO :: {state.message.toUpperCase()}
+          </p>
           {attempts > 0 && (
-            <span className="ml-auto text-slate-500">
-              {attempts} {attempts === 1 ? "intento" : "intentos"}
-            </span>
+            <p className="text-red-900 text-xs tracking-widest">
+              INTENTOS: {attempts}
+            </p>
           )}
-        </p>
+        </div>
       )}
 
       <SubmitButton />

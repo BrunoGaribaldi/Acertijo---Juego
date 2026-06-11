@@ -1,3 +1,100 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Scanlines overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    rgba(0, 0, 0, 0.12) 3px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Glitch animation for title */
+@keyframes glitch {
+  0%, 90%, 100% {
+    text-shadow: 2px 0 #ff0000, -2px 0 #00ffff;
+    transform: translateX(0);
+    clip-path: none;
+  }
+  92% {
+    text-shadow: -3px 0 #ff0000, 3px 0 #00ffff;
+    transform: translateX(-3px);
+  }
+  94% {
+    text-shadow: 3px 0 #ff0000, -3px 0 #00ffff;
+    transform: translateX(3px);
+  }
+  96% {
+    text-shadow: 2px 2px #ff0000, -2px -2px #00ffff;
+    transform: translateX(-1px);
+  }
+  98% {
+    text-shadow: none;
+    transform: translateX(0);
+  }
+}
+
+/* Blink cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Screen flicker */
+@keyframes flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+  20%, 24%, 55% { opacity: 0.6; }
+}
+
+/* Green glow pulse */
+@keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 8px #22c55e, 0 0 16px #22c55e; }
+  50% { text-shadow: 0 0 16px #22c55e, 0 0 32px #22c55e, 0 0 48px #22c55e; }
+}
+
+.glitch {
+  animation: glitch 5s infinite;
+}
+
+.blink {
+  animation: blink 1s step-end infinite;
+}
+
+.flicker {
+  animation: flicker 6s linear infinite;
+}
+
+.glow-green {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Terminal input prefix */
+.terminal-input {
+  font-family: inherit;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: #166534;
+}
+
+/* Selection */
+::selection {
+  background: #166534;
+  color: #4ade80;
+}

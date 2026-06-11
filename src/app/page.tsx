@@ -7,42 +7,78 @@ export default async function HomePage() {
   const riddle = await getCurrentRiddle();
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-lg">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-purple-400 mb-1">🧩 Acertijos</h1>
-          <p className="text-slate-500 text-sm">Descubrí la palabra correcta</p>
+    <main className="min-h-screen py-16 px-4">
+      <div className="w-full max-w-xl mx-auto">
+
+        {/* Header */}
+        <div className="text-center mb-10">
+          <p className="text-green-700 text-xs tracking-[0.4em] mb-2">
+            ██ SISTEMA RESTRINGIDO ██
+          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-green-400 tracking-widest glitch mb-1">
+            BLACK MIRROR LIST
+          </h1>
+          <p className="text-green-800 text-xs tracking-[0.3em]">
+            ACCESO :: NIVEL MÁXIMO REQUERIDO
+          </p>
         </div>
 
-        <div className="bg-slate-800 rounded-2xl shadow-2xl p-8 border border-slate-700">
+        {/* Main card */}
+        <div className="border border-green-900 bg-zinc-950 p-8">
+
+          {/* Top bar */}
+          <div className="flex items-center justify-between mb-6 pb-4 border-b border-green-900">
+            <span className="text-green-700 text-xs tracking-widest">
+              [ARCHIVO_CLASIFICADO]
+            </span>
+            <span className="text-green-800 text-xs blink">█</span>
+          </div>
+
           {riddle ? (
             <>
               <div className="mb-8">
-                <p className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-3">
-                  Acertijo
+                <p className="text-green-700 text-xs tracking-widest mb-4">
+                  &gt; CARGANDO ARCHIVO...
                 </p>
-                <p className="text-lg leading-relaxed text-slate-100">
-                  {riddle.question}
+                <div className="border-l-2 border-green-700 pl-4">
+                  <p className="text-green-300 leading-relaxed text-base flicker">
+                    {riddle.question}
+                  </p>
+                </div>
+                <p className="text-green-800 text-xs mt-4 tracking-widest">
+                  &gt; INGRESÁ LA CONTRASEÑA DE ACCESO PARA DESENCRIPTAR
                 </p>
               </div>
               <GuessForm />
             </>
           ) : (
-            <div className="text-center py-8">
-              <div className="text-5xl mb-4">🔒</div>
-              <p className="text-slate-400 text-lg">
-                No hay ningún acertijo activo en este momento.
+            <div className="text-center py-10">
+              <p className="text-red-700 text-4xl mb-4 tracking-widest">
+                [404]
               </p>
-              <p className="text-slate-600 text-sm mt-2">
-                Volvé más tarde.
+              <p className="text-red-500 text-sm tracking-widest mb-2">
+                ARCHIVO NO ENCONTRADO
+              </p>
+              <p className="text-green-900 text-xs tracking-widest">
+                BASE DE DATOS VACÍA :: CONTACTAR ADMINISTRADOR
               </p>
             </div>
           )}
+
+          {/* Bottom bar */}
+          <div className="mt-8 pt-4 border-t border-green-900">
+            <p className="text-green-900 text-xs tracking-widest text-right">
+              CONEXIÓN ENCRIPTADA :: TOR v2.9.1
+            </p>
+          </div>
         </div>
 
-        <p className="text-center text-slate-700 text-xs mt-6">
-          <a href="/admin/login" className="hover:text-slate-500 transition-colors">
-            Administración
+        <p className="text-center mt-4">
+          <a
+            href="/admin/login"
+            className="text-green-900 hover:text-green-700 text-xs tracking-widest transition-colors"
+          >
+            &gt; ACCESO RAÍZ
           </a>
         </p>
       </div>

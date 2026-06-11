@@ -7,7 +7,7 @@ export default function DeleteRiddleButton() {
   const [isPending, startTransition] = useTransition();
 
   function handleDelete() {
-    if (!confirm("¿Seguro que querés eliminar el acertijo actual?")) return;
+    if (!confirm("PURGAR ARCHIVO ACTIVO?\n\nEsta operacion es irreversible.")) return;
     startTransition(() => {
       deleteRiddle();
     });
@@ -17,9 +17,9 @@ export default function DeleteRiddleButton() {
     <button
       onClick={handleDelete}
       disabled={isPending}
-      className="px-4 py-2 bg-red-600 hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-xl transition-colors"
+      className="px-4 py-2 border border-red-900 hover:border-red-600 hover:bg-red-950/20 disabled:opacity-40 disabled:cursor-not-allowed text-red-700 hover:text-red-500 text-xs tracking-widest transition-colors uppercase"
     >
-      {isPending ? "Eliminando..." : "Eliminar acertijo"}
+      {isPending ? "[ PURGANDO... ]" : "[ PURGAR ]"}
     </button>
   );
 }

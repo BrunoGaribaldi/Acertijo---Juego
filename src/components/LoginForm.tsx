@@ -12,9 +12,9 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full py-3 px-6 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
+      className="w-full py-3 px-6 border border-green-700 bg-black hover:bg-green-950 disabled:opacity-40 disabled:cursor-not-allowed text-green-400 tracking-widest text-sm transition-colors uppercase"
     >
-      {pending ? "Ingresando..." : "Ingresar"}
+      {pending ? "[ AUTENTICANDO... ]" : "[ AUTENTICAR ]"}
     </button>
   );
 }
@@ -31,35 +31,45 @@ export default function LoginForm() {
   }, [state, router]);
 
   return (
-    <form action={formAction} className="space-y-4">
+    <form action={formAction} className="space-y-5">
       <div>
-        <label className="block text-sm font-medium text-slate-400 mb-1">
-          Usuario
+        <label className="block text-xs tracking-widest text-green-700 mb-2 uppercase">
+          &gt; ID de usuario
         </label>
-        <input
-          name="username"
-          type="text"
-          autoComplete="username"
-          required
-          className="w-full px-4 py-3 bg-slate-700 border border-slate-600 focus:border-purple-500 focus:outline-none rounded-xl text-white placeholder-slate-400 transition-colors"
-        />
+        <div className="flex items-center border border-green-800 bg-black focus-within:border-green-500 transition-colors">
+          <span className="px-3 text-green-600 text-sm select-none">_</span>
+          <input
+            name="username"
+            type="text"
+            autoComplete="username"
+            required
+            className="flex-1 py-3 pr-4 bg-transparent text-green-400 text-sm tracking-widest focus:outline-none"
+          />
+        </div>
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-400 mb-1">
-          Contraseña
+        <label className="block text-xs tracking-widest text-green-700 mb-2 uppercase">
+          &gt; Contraseña
         </label>
-        <input
-          name="password"
-          type="password"
-          autoComplete="current-password"
-          required
-          className="w-full px-4 py-3 bg-slate-700 border border-slate-600 focus:border-purple-500 focus:outline-none rounded-xl text-white placeholder-slate-400 transition-colors"
-        />
+        <div className="flex items-center border border-green-800 bg-black focus-within:border-green-500 transition-colors">
+          <span className="px-3 text-green-600 text-sm select-none">_</span>
+          <input
+            name="password"
+            type="password"
+            autoComplete="current-password"
+            required
+            className="flex-1 py-3 pr-4 bg-transparent text-green-400 text-sm tracking-widest focus:outline-none"
+          />
+        </div>
       </div>
 
       {state && !state.success && (
-        <p className="text-red-400 text-sm">{state.error}</p>
+        <div className="border border-red-900 px-4 py-2">
+          <p className="text-red-500 text-xs tracking-widest">
+            ERROR :: {state.error.toUpperCase()}
+          </p>
+        </div>
       )}
 
       <SubmitButton />

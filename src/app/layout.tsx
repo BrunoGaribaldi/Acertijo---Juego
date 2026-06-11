@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Share_Tech_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Share_Tech_Mono({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Acertijos",
-  description: "Juego de acertijos",
+  title: "BLACK MIRROR LIST",
+  description: "SISTEMA DE ACCESO RESTRINGIDO",
 };
 
 export default function RootLayout({
@@ -16,9 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body
-        className={`${inter.className} min-h-screen bg-slate-950 text-white`}
-      >
+      <body className={`${font.className} min-h-screen bg-black text-green-400`}>
         {children}
       </body>
     </html>
