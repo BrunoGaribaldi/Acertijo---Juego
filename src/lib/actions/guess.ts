@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 
 export type GuessResult =
-  | { correct: true }
+  | { correct: true; secretText: string | null }
   | { correct: false; message: string };
 
 export async function checkGuess(
@@ -17,7 +17,7 @@ export async function checkGuess(
   }
 
   const riddle = await prisma.riddle.findFirst({
-    select: { answer: true },
+    select: { answer: true, secretText: true },
     orderBy: { createdAt: "desc" },
   });
 
@@ -26,7 +26,7 @@ export async function checkGuess(
   }
 
   if (userGuess === riddle.answer) {
-    return { correct: true };
+    return { correct: true, secretText: riddle.secretText };
   }
 
   return { correct: false, message: "Incorrecto. ¡Intenta de nuevo!" };

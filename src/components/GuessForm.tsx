@@ -35,17 +35,31 @@ export default function GuessForm() {
 
   if (state?.correct) {
     return (
-      <div className="text-center py-8">
-        <div className="text-6xl mb-4">🎉</div>
-        <h2 className="text-2xl font-bold text-green-400 mb-2">¡Ganaste!</h2>
-        <p className="text-slate-400">
-          {attempts === 1
-            ? "¡Lo lograste al primer intento!"
-            : `Lo lograste en ${attempts} intentos.`}
-        </p>
+      <div className="py-4">
+        <div className="text-center mb-6">
+          <div className="text-6xl mb-4">🎉</div>
+          <h2 className="text-2xl font-bold text-green-400 mb-2">¡Ganaste!</h2>
+          <p className="text-slate-400">
+            {attempts === 1
+              ? "¡Lo lograste al primer intento!"
+              : `Lo lograste en ${attempts} intentos.`}
+          </p>
+        </div>
+
+        {state.secretText && (
+          <div className="mt-6 p-5 bg-slate-700 border border-purple-500/40 rounded-xl">
+            <p className="text-xs font-semibold uppercase tracking-widest text-purple-400 mb-3">
+              🔓 Texto desbloqueado
+            </p>
+            <p className="text-slate-100 leading-relaxed whitespace-pre-wrap">
+              {state.secretText}
+            </p>
+          </div>
+        )}
+
         <button
           onClick={() => window.location.reload()}
-          className="mt-6 px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl transition-colors text-sm"
+          className="mt-6 w-full px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl transition-colors text-sm"
         >
           Intentar de nuevo
         </button>

@@ -40,6 +40,12 @@ export default async function AdminPage() {
                     {riddle.answer}
                   </span>
                 </p>
+                {riddle.secretText && (
+                  <p className="text-sm text-slate-400 mt-2">
+                    Texto secreto:{" "}
+                    <span className="text-purple-300">{riddle.secretText}</span>
+                  </p>
+                )}
               </div>
               <DeleteRiddleButton />
             </div>

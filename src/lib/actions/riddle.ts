@@ -35,6 +35,7 @@ export async function upsertRiddle(
 
   const question = (formData.get("question") as string)?.trim();
   const answer = (formData.get("answer") as string)?.trim().toLowerCase();
+  const secretText = (formData.get("secretText") as string)?.trim() || null;
 
   if (!question || !answer) {
     return { success: false, error: "La pregunta y la respuesta son requeridas." };
@@ -42,7 +43,7 @@ export async function upsertRiddle(
 
   await prisma.$transaction([
     prisma.riddle.deleteMany(),
-    prisma.riddle.create({ data: { question, answer } }),
+    prisma.riddle.create({ data: { question, answer, secretText } }),
   ]);
 
   revalidatePath("/");

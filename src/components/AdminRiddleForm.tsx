@@ -8,6 +8,7 @@ interface Riddle {
   id: string;
   question: string;
   answer: string;
+  secretText: string | null;
 }
 
 function SubmitButton({ isEdit }: { isEdit: boolean }) {
@@ -62,6 +63,20 @@ export default function AdminRiddleForm({ riddle }: { riddle: Riddle | null }) {
         <p className="text-xs text-slate-500 mt-1">
           La comparación es insensible a mayúsculas/minúsculas.
         </p>
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-400 mb-1">
+          Texto secreto{" "}
+          <span className="text-slate-600 font-normal">(se revela al ganar)</span>
+        </label>
+        <textarea
+          name="secretText"
+          defaultValue={riddle?.secretText ?? ""}
+          placeholder="Este texto solo aparece cuando el jugador adivina correctamente..."
+          rows={3}
+          className="w-full px-4 py-3 bg-slate-700 border border-slate-600 focus:border-purple-500 focus:outline-none rounded-xl text-white placeholder-slate-400 transition-colors resize-none"
+        />
       </div>
 
       {state && !state.success && (
